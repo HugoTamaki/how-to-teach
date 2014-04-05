@@ -1,0 +1,6 @@
+<%= simple_form_for(@methodology) do |f| %>
+  <%= f.input :title %>
+  <%= f.input :content %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.submit %>
+<% end %>
