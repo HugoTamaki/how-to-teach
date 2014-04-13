@@ -1,0 +1,14 @@
+<h1>User profile</h1>
+
+<div class="row">
+  <div class="col-lg-4">
+    <%= "#{@user.first_name} #{@user.last_name}" %>
+  </div>
+  <div class="col-lg-8">
+    <% if @search %>
+      <% @search.each do |result| %>
+        <p><%= link_to "#{result.first_name}", profile_path(result) %></p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
