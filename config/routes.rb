@@ -1,6 +1,10 @@
 HowToTeach::Application.routes.draw do
   resources :methodologies
 
+  root to: 'static_pages#index'
+  get 'users/my_profile' => 'users#my_profile', as: 'my_profile'
+  get 'users/profile/:id' => 'users#profile', as: 'profile'
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
