@@ -5,7 +5,7 @@ class MethodologiesController < ApplicationController
   # GET /methodologies
   # GET /methodologies.json
   def index
-    @methodologies = Methodology.all
+    @methodologies = Methodology.by_user(current_user)
   end
 
   # GET /methodologies/1

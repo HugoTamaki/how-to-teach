@@ -3,4 +3,6 @@ class Methodology < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :content, presence: true
+
+	scope :by_user, lambda{|user| where(user_id: user.id)}
 end
