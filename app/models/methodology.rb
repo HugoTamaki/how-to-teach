@@ -5,4 +5,6 @@ class Methodology < ActiveRecord::Base
 	validates :content, presence: true
 
 	scope :by_user, lambda{|user| where(user_id: user.id)}
+
+    belongs_to :user
 end
