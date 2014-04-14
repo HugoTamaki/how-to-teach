@@ -6,5 +6,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = User.find(params[:id])
+    @search = User.search(params[:search]) if params[:search]
+    render my_profile_path if params[:search]
   end
 end
