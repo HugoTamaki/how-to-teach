@@ -1,3 +1,5 @@
 <h1><%= @user.first_name %></h1>
 
 <p>This is it!</p>
+
+<p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), method: :post %></p>

@@ -32,5 +32,13 @@
     <% end %>
   </div>
 </div>
+<div class="row">
+  <div class="col-lg-12">
+    <h2>Meus amigos</h2>
+      <% @user.friendships.each do |friendship| %>
+        <p><%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %></p>
+      <% end %>
+  </div>
+</div>
 
 <%= link_to 'Criar Metodologia', new_methodology_path %>

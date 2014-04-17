@@ -1,4 +1,8 @@
 HowToTeach::Application.routes.draw do
+  # get "friendships/create/:friend_id", to: "friendships#create", as: "new_frienship"
+  # get "friendships/create"
+  # get "friendships/destroy"
+  resources :friendships
   resources :methodologies
 
   root to: 'static_pages#index'

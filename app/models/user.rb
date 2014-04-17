@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
   end
 
   has_many :methodologies
+  has_many :friendships
+  has_many :friends, through: :friendships
 end
