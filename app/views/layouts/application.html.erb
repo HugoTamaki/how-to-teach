@@ -8,6 +8,22 @@
 </head>
 <body>
 <%= render 'menu/menu' %>
+    <div id="flashes">
+        <div class="container">
+            <% if flash[:notice] %>
+                <div class="alert alert-success">
+                    <%= flash[:notice] %>
+                </div>
+            <% end %>
+            <% if flash[:error] || flash[:errors] || flash[:alert] %>
+                <div class="alert alert-danger">
+                    <%= flash[:error] || flash[:errors] || flash[:alert]  %>
+                </div>
+            <% end %>
+
+            <% flash[:error] = flash[:errors] = flash[:notice] = nil %>
+            </div>
+    </div>
 	<div class="container">
 		<%= yield %>
 	</div>
