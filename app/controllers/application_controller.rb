@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
     my_profile_path
   end
 
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   redirect_to root_url, :alert => exception.message
-  # end
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to my_profile_path, :alert => exception.message
+  end
 
   protected
 
