@@ -36,7 +36,10 @@
   <div class="col-lg-12">
     <h2>Meus amigos</h2>
       <% @user.friendships.each do |friendship| %>
-        <p><%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %></p>
+        <p>
+          <%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %> - 
+          <%= link_to "Remover amigo", friendship, method: :delete, confirm: "Tem certeza que deseja remover amigo?" %>
+        </p>
       <% end %>
   </div>
 </div>
