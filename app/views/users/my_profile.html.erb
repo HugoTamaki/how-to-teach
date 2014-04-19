@@ -1,19 +1,9 @@
-<h1>User profile</h1>
+<h1>Meu Perfil</h1>
 
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-12">
     <h2>Meus dados</h2>
     <%= "#{@user.first_name} #{@user.last_name}" %>
-  </div>
-  <div class="col-lg-8">
-    <% if @search %>
-      <% @search.each do |result| %>
-        <p>
-        <%= link_to "#{result.title}", methodology_path(result) %> by 
-        <%= link_to "#{result.user.first_name}", profile_path(result.user.id) %>
-        </p>
-      <% end %>
-    <% end %>
   </div>
 </div>
 <div class="row">
@@ -23,8 +13,11 @@
       <p>Não há metodologias cadastradas.</p>
     <% else %>
       <% @user.methodologies.each do |methodology| %>
+        <h3><%= link_to "#{methodology.title}", methodology_path(methodology) %></h3>
         <p>
-          <%= link_to "#{methodology.title}", methodology_path(methodology) %> - 
+          <%= methodology.content.html_safe %>
+        </p>
+        <p>
           <%= link_to "Editar", edit_methodology_path(methodology), class: "btn btn-primary"  %>
           <%= link_to 'Remover', methodology, class: "btn btn-danger", confirm: 'Você tem certeza?', method: :delete %>
         </p>
@@ -43,5 +36,3 @@
       <% end %>
   </div>
 </div>
-
-<%= link_to 'Criar Metodologia', new_methodology_path %>
