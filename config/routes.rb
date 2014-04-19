@@ -8,6 +8,7 @@ HowToTeach::Application.routes.draw do
   root to: 'static_pages#index'
   get 'users/my_profile' => 'users#my_profile', as: 'my_profile'
   get 'users/profile/:id' => 'users#profile', as: 'profile'
+  get 'users/search' => 'users#search', as: 'search'
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

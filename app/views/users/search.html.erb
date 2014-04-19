@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-lg-12">
+        <% if @search %>
+          <% @search.each do |result| %>
+            <p>
+            <%= link_to "#{result.title}", methodology_path(result) %> by 
+            <%= link_to "#{result.user.first_name}", profile_path(result.user.id) %>
+            </p>
+          <% end %>
+        <% end %>        
+    </div>
+</div>
