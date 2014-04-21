@@ -30,7 +30,7 @@ class MethodologiesController < ApplicationController
 
     respond_to do |format|
       if @methodology.save
-        format.html { redirect_to my_profile_path, notice: 'Methodology was successfully created.' }
+        format.html { redirect_to my_profile_path, notice: 'Metodologia criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @methodology }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class MethodologiesController < ApplicationController
   def update
     respond_to do |format|
       if @methodology.update(methodology_params)
-        format.html { redirect_to @methodology, notice: 'Methodology was successfully updated.' }
+        format.html { redirect_to @methodology, notice: 'Metodologia atualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
