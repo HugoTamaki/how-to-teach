@@ -12,11 +12,21 @@
  *= require_tree .
  */
 
+.friends {
+    a {
+        font-size: 16px;
+    }
+}
+
  .login-box {
  	margin-top: 15px;
  	float: right;
  }
 
- .methodologies a {
-    color: white;
- }
+.methodology {
+    height: 300px;
+    overflow: auto;
+    a {
+        color: white;
+    }
+}

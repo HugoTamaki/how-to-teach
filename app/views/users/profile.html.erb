@@ -1,22 +1,29 @@
-<h1><%= @user.first_name %></h1>
+<div class="container">
+    <h1><%= @user.first_name %></h1>
 
-<h2>Minhas metodologias</h2>
+    <div class="row">
+        <h2>Minhas metodologias</h2>
+        <div class="col-lg-12">
+            <div class="methodology">
+                <% if @user.methodologies.empty? %>
+                    Não há metodologias cadastradas
+                <% else %>
+                    <% @user.methodologies.each do |methodology| %>
+                        <h3><%= link_to "#{methodology.title}", methodology_path(methodology) %></h3>
+                        <p>
+                          <%= methodology.content.html_safe %>
+                        </p>
+                    <% end %>
+                <% end %>
+            </div>
+            <div class="friends">
+                <h2>Meus amigos</h2>
+                <% @user.friendships.each do |friendship| %>
+                    <p><%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %></p>
+                <% end %>
 
-<% if @user.methodologies.empty? %>
-    Não há metodologias cadastradas
-<% else %>
-    <% @user.methodologies.each do |methodology| %>
-        <h3><%= link_to "#{methodology.title}", methodology_path(methodology) %></h3>
-        <p>
-          <%= methodology.content.html_safe %>
-        </p>
-    <% end %>
-<% end %>
-
-<h2>Meus amigos</h2>
-
-<% @user.friendships.each do |friendship| %>
-    <p><%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %></p>
-<% end %>
-
-<p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), class: "btn btn-primary", method: :post if current_user.friendships.where(friend_id: @user).blank? %></p>
+                <p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), class: "btn btn-primary", method: :post if current_user.friendships.where(friend_id: @user).blank? %></p>
+            </div>
+        </div>
+    </div>
+</div>
