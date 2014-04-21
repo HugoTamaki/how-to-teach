@@ -28,8 +28,13 @@
         <h2>Meus amigos</h2>
         <% @user.friendships.each do |friendship| %>
           <p>
-            <%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %> - 
-            <%= link_to "Remover amigo", friendship, method: :delete, confirm: "Tem certeza que deseja remover amigo?" %>
+            <% if friendship.invited && !friendship.accepted %>
+               <%= friendship.friend.first_name %> adicionou você como amigo, deseja aceitar? - 
+               <%= link_to "Aceitar", accept_path(id: friendship.id, friend_id: friendship.friend.id), class: "btn btn-primary" %>
+            <% elsif friendship.accepted %>
+              <%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %> - 
+              <%= link_to "Remover amigo", friendship, method: :delete, confirm: "Tem certeza que deseja remover amigo?" %>
+            <% end %>
           </p>
         <% end %>
       </div>
