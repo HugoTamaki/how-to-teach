@@ -12,10 +12,23 @@ class FriendshipsController < ApplicationController
   def destroy
     @friendship = current_user.friendships.find(params[:id])
     @friend_friendship = Friendship.where(user_id: @friendship.friend.id).first
+    binding.pry
     @friendship.destroy
     @friend_friendship.destroy
     flash[:notice] = "Contato removido."
     redirect_to my_profile_path
+  end
+
+  def accept
+    @friendship = Friendship.find(params[:friendship_id])
+    @friend_friendship = Friendship.where(user_id: @friendship.friend.id).first
+    @friendship.accepted = true
+    @friend_friendship.accepted = true
+    if @friendship.save && @friend_friendship.save
+        redirect_to my_profile_path, notice: "Amigo aceito com sucesso."
+      else
+        redirect_to my_profile_path, alert: "Não foi possível aceitar o amigo."
+    end
   end
 
   private

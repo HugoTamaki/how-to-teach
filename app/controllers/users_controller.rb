@@ -17,18 +17,6 @@ class UsersController < ApplicationController
     
   end
 
-  def accept
-    @friendship = Friendship.find(params[:id])
-    @friend_friendship = Friendship.where(user_id: params[:friend_id]).first
-    @friendship.accepted = true
-    @friend_friendship.accepted = true
-    if @friendship.save && @friend_friendship.save
-        redirect_to my_profile_path, notice: "Amigo aceito com sucesso."
-      else
-        redirect_to my_profile_path, alert: "Não foi possível aceitar o amigo."
-    end
-  end
-
   private
 
   def user_params
