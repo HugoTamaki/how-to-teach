@@ -32,6 +32,14 @@ group :development do
 	gem 'binding_of_caller'
 end
 
+group :test do
+  gem 'rspec-rails'
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "database_cleaner"
+  gem "selenium-webdriver", "~> 2.38.0"
+end
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
