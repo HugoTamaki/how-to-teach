@@ -58,7 +58,7 @@ class MethodologiesController < ApplicationController
   def destroy
     @methodology.destroy
     respond_to do |format|
-      format.html { redirect_to my_profile_path }
+      format.html { redirect_to my_profile_path, notice: 'Metodologia apagada com sucesso.' }
       format.json { head :no_content }
     end
   end
