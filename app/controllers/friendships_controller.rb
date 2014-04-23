@@ -11,8 +11,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friendship = current_user.friendships.find(params[:id])
-    @friend_friendship = Friendship.where(user_id: @friendship.friend.id).first
-    binding.pry
+    @friend_friendship = Friendship.where(user_id: @friendship.friend.id, friend_id: @friendship.user.id).first
     @friendship.destroy
     @friend_friendship.destroy
     flash[:notice] = "Contato removido."
@@ -21,7 +20,7 @@ class FriendshipsController < ApplicationController
 
   def accept
     @friendship = Friendship.find(params[:friendship_id])
-    @friend_friendship = Friendship.where(user_id: @friendship.friend.id).first
+    @friend_friendship = Friendship.where(user_id: @friendship.friend.id, friend_id: @friendship.user.id).first
     @friendship.accepted = true
     @friend_friendship.accepted = true
     if @friendship.save && @friend_friendship.save
