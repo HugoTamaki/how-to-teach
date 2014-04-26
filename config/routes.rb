@@ -6,7 +6,9 @@ HowToTeach::Application.routes.draw do
     get 'accept', as: 'accept'
   end
 
-  resources :methodologies
+  resources :methodologies do
+    resources :comments
+  end
 
   root to: 'static_pages#index'
   get 'users/my_profile' => 'users#my_profile', as: 'my_profile'

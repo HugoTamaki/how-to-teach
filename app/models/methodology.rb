@@ -6,5 +6,6 @@ class Methodology < ActiveRecord::Base
 
 	scope :by_user, lambda{|user| where(user_id: user.id)}
 
-    belongs_to :user
+  belongs_to :user
+  has_many :comments
 end
