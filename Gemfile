@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 1.2'
 group :development do
 	gem 'better_errors'
 	gem 'binding_of_caller'
+  gem 'awesome_print', :require => 'ap'
+  gem 'pry'
 end
 
 group :test do
@@ -48,8 +50,7 @@ end
 gem 'devise'
 gem 'simple_form'
 gem 'cancan'
-gem 'awesome_print', :require => 'ap'
-gem 'pry'
+gem 'nested_form'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

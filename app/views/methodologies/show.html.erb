@@ -4,6 +4,14 @@
     <div class="methodology-content">
         <%= @methodology.content %>
     </div>
+
+    <div class="methodology-videos">
+        <% if @methodology.videos %>
+            <% @methodology.videos.each do |video| %>
+                <%= video.url %>
+            <% end %>
+        <% end %>
+    </div>
 </div>
 
 <div class="methodology-comments">

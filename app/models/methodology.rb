@@ -8,4 +8,8 @@ class Methodology < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments
+  has_many :videos
+  accepts_nested_attributes_for :videos, 
+                                :reject_if => proc { |att| att['name'].blank? },
+                                :allow_destroy => true
 end

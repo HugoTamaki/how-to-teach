@@ -71,6 +71,6 @@ class MethodologiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def methodology_params
-      params.require(:methodology).permit(:title, :content, :user_id)
+      params.require(:methodology).permit(:title, :content, :user_id, videos_attributes: [:id, :methodology_id, :url, :_destroy])
     end
 end
