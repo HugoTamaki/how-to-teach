@@ -10,6 +10,6 @@ class Methodology < ActiveRecord::Base
   has_many :comments
   has_many :videos
   accepts_nested_attributes_for :videos, 
-                                :reject_if => proc { |att| att['name'].blank? },
+                                :reject_if => proc { |att| att['url'].blank? },
                                 :allow_destroy => true
 end
