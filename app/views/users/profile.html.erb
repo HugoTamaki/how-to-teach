@@ -30,7 +30,9 @@
                   </p>
                 <% end %>
 
-                <p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), class: "btn btn-primary", method: :post if current_user.friendships.where(friend_id: @user).blank? %></p>
+                <% unless @user == current_user %>
+                  <p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), class: "btn btn-primary", method: :post if current_user.friendships.where(friend_id: @user).blank? %></p>
+                <% end %>
             </div>
         </div>
     </div>

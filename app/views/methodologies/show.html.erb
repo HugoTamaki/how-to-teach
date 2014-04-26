@@ -1,6 +1,9 @@
 <div class="container">
     <h2><%= @methodology.title %> - <%= "por #{@methodology.user.first_name}" %></h2>
-
+    <% if @methodology.user == current_user %>
+        <p><%= link_to "Editar", edit_methodology_path(@methodology), class: "btn btn-primary" %></p>
+    <% end %>
+    
     <div class="methodology-content">
         <%= @methodology.content %>
     </div>
@@ -8,7 +11,7 @@
     <div class="methodology-videos">
         <% if @methodology.videos %>
             <% @methodology.videos.each do |video| %>
-                <%= video.url %>
+                <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
             <% end %>
         <% end %>
     </div>
