@@ -1,3 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag 'jquery.raty.js','letsrate.js'%>
+<% end %> 
+
 <div class="container">
     <h2><%= @methodology.title %> - <%= "por #{@methodology.user.first_name}" %></h2>
     <% if @methodology.user == current_user %>
@@ -14,6 +18,15 @@
                 <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
             <% end %>
         <% end %>
+    </div>
+
+    <div class="methodology-rating">
+        <% if @methodology.qualidade_rates.where(rater_id: current_user.id).present? %>
+            Avaliação da Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
+        <% else %>
+            Avalie esta Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
+        <% end %>
+        Quantos professores avaliaram: <%= @rating.qty if @rating %>
     </div>
 </div>
 

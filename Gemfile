@@ -51,6 +51,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'cancan'
 gem 'nested_form'
+gem 'letsrate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

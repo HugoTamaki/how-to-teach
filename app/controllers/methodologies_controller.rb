@@ -13,6 +13,7 @@ class MethodologiesController < ApplicationController
   # GET /methodologies/1
   # GET /methodologies/1.json
   def show
+    @rating = RatingCache.where(cacheable_id: params[:id]).first
     search_path params[:search] if params[:search]
   end
 

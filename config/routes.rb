@@ -1,4 +1,5 @@
 HowToTeach::Application.routes.draw do
+  post '/rate' => 'rater#create', :as => 'rate'
   # get "friendships/create/:friend_id", to: "friendships#create", as: "new_frienship"
   # get "friendships/create"
   # get "friendships/destroy"

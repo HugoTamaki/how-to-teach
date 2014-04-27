@@ -1,4 +1,6 @@
 class Methodology < ActiveRecord::Base
+  letsrate_rateable "qualidade"
+
 	belongs_to :user
 
 	validates :title, presence: true
