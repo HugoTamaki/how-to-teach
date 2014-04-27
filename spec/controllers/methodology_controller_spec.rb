@@ -27,7 +27,7 @@ feature "Methodology", js: true do
       fill_in "Conteúdo", with: ""
       click_button "GO"
 
-      expect(page).to have_text("can't be blank")
+      expect(page).to have_text("não pode ficar em branco")
       current_path.should == "/methodologies"
     end
 
@@ -47,7 +47,7 @@ feature "Methodology", js: true do
       fill_in "Conteúdo", with: ""
       click_button "GO"
 
-      expect(page).to have_text("can't be blank")
+      expect(page).to have_text("não pode ficar em branco")
       current_path.should == "/methodologies/#{Methodology.last.id}"
     end
 
