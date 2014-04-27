@@ -5,22 +5,26 @@ class MethodologiesController < ApplicationController
 
   # GET /methodologies
   # GET /methodologies.json
+
   def index
-    @methodologies = Methodology.by_user(current_user)
+    
   end
 
   # GET /methodologies/1
   # GET /methodologies/1.json
   def show
+    search_path params[:search] if params[:search]
   end
 
   # GET /methodologies/new
   def new
     @methodology = Methodology.new
+    search_path params[:search] if params[:search]
   end
 
   # GET /methodologies/1/edit
   def edit
+    search_path params[:search] if params[:search]
   end
 
   # POST /methodologies
@@ -64,6 +68,12 @@ class MethodologiesController < ApplicationController
   end
 
   private
+
+    def search_path(search)
+      @search = User.search(search)
+      render "users/search"
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_methodology
       @methodology = Methodology.find(params[:id])
