@@ -1,3 +1,6 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag 'jquery.raty.js','letsrate.js'%>
+<% end %> 
 <div class="container">
     <h1><%= @user.first_name %></h1>
 
@@ -10,6 +13,7 @@
                 <% else %>
                     <% @user.methodologies.each do |methodology| %>
                         <h3><%= link_to "#{methodology.title}", methodology_path(methodology) %></h3>
+                        <p><%= rating_for methodology, "qualidade", star: 5 %></p>
                         <p>
                           <%= methodology.content.html_safe %>
                         </p>

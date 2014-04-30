@@ -1,3 +1,6 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag 'jquery.raty.js','letsrate.js'%>
+<% end %> 
 <div class="container">
   <h1>Meu Perfil</h1>
 
@@ -6,6 +9,13 @@
       <div class="data">
         <h2>Meus dados</h2>
         <%= "#{@user.first_name} #{@user.last_name}" %>
+
+        <div class="user-schools">
+          <h2>Escolas em que já lecionou</h2>
+          <% @user.schools.each do |school| %>
+            <p><%= school.name %></p>
+          <% end %>
+        </div>
       </div>
       <h2>Minhas metodologias</h2>
       <div class="methodology">
@@ -14,6 +24,7 @@
         <% else %>
           <% @user.methodologies.each do |methodology| %>
             <h3><%= link_to "#{methodology.title}", methodology_path(methodology) %></h3>
+            <p><%= rating_for methodology, "qualidade", star: 5 %></p>
             <p>
               <%= methodology.content.html_safe %>
             </p>
