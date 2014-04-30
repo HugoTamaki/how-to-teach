@@ -16,7 +16,6 @@
 //= require_tree .
 
 $(document).ready(function() {
-    console.log("ahh");
     $(".fancybox").click(function() {
       $.fancybox({
           'padding'   : 0,

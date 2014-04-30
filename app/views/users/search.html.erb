@@ -4,7 +4,8 @@
           <% @search.each do |result| %>
             <p>
                 <%= link_to "#{result.title}", methodology_path(result) %> by 
-                <%= link_to "#{result.user.first_name}", profile_path(result.user.id) %>
+                <%= link_to "#{result.user.first_name}", profile_path(result.user.id) %> - 
+                <%= rating_for result, "qualidade", star: 5 %>
             </p>
             <p>
                 <%= "#{result.content}" %>
