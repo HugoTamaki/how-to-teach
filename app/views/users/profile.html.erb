@@ -2,7 +2,10 @@
   <%= javascript_include_tag 'jquery.raty.js','letsrate.js'%>
 <% end %> 
 <div class="container">
-    <h1><%= @user.first_name %></h1>
+    <h1>
+      <%= image_tag @user.avatar(:profile) %>
+      <%= @user.first_name %>
+    </h1>
 
     <div class="row">
         <h2>Minhas metodologias</h2>

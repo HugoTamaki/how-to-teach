@@ -52,6 +52,7 @@ gem 'simple_form'
 gem 'cancan'
 gem 'nested_form'
 gem 'letsrate'
+gem "paperclip", "~> 4.1"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -8,6 +8,7 @@
     <div class="col-lg-5">
       <div class="data">
         <h2>Meus dados</h2>
+        <%= image_tag @user.avatar(:profile) %>
         <%= "#{@user.first_name} #{@user.last_name}" %>
 
         <div class="user-schools">

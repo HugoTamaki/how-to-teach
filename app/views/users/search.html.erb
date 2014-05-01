@@ -1,15 +1,16 @@
-<div class="row">
-    <div class="col-lg-12 search">
+<div class="container">
+    <div class="row">
         <% if @search.present? %>
           <% @search.each do |result| %>
-            <p>
+            <div class="col-lg-1">
+                <%= image_tag result.user.avatar(:search_thumb) %>
+            </div>
+            <div class="col-lg-11">
                 <%= link_to "#{result.title}", methodology_path(result) %> by 
                 <%= link_to "#{result.user.first_name}", profile_path(result.user.id) %> - 
                 <%= rating_for result, "qualidade", star: 5 %>
-            </p>
-            <p>
                 <%= "#{result.content}" %>
-            </p>
+            </div>
           <% end %>
         <% else %>
             Nenhum resultado.
