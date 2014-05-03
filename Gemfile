@@ -40,6 +40,7 @@ group :test do
   gem "capybara"
   gem "database_cleaner"
   gem "selenium-webdriver", "~> 2.38.0"
+  gem "fuubar"
 end
 
 group :doc do
