@@ -7,7 +7,7 @@ HowToTeach::Application.routes.draw do
     get 'accept', as: 'accept'
   end
 
-  resources :methodologies do
+  resources :methodologies, except: :index do
     resources :comments
   end
 
