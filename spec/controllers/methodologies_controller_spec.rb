@@ -5,7 +5,7 @@ describe MethodologiesController do
   let(:user) { FactoryGirl.create(:user) }
 
   before(:each) do
-    (0..3).each do |i|
+    for i in (1..4)
       user.methodologies.build(title: 'titulo #{i}', content: 'conteudo')
     end
     user.save
@@ -16,7 +16,7 @@ describe MethodologiesController do
 
     it 'gets users methodology' do
       get :show, id: methodology
-      assigns(:methodology).should eq methodology
+      assigns(:methodology).should == methodology
     end
 
     it 'renders the :show view' do
