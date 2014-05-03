@@ -24,6 +24,7 @@ class FriendshipsController < ApplicationController
     @friendship.accepted = true
     @friend_friendship.accepted = true
     if @friendship.save && @friend_friendship.save
+        User.post_feed(current_user, "#{current_user.full_name} é agora amigo de #{@friendship.friend.first_name}")
         redirect_to my_profile_path, notice: "Amigo aceito com sucesso."
       else
         redirect_to my_profile_path, alert: "Não foi possível aceitar o amigo."

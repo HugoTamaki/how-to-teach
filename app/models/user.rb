@@ -18,8 +18,23 @@ class User < ActiveRecord::Base
   has_many :friendships
   has_many :friends, through: :friendships
   has_many :comments
+  has_many :feeds
   has_many :schools
   accepts_nested_attributes_for :schools, 
                                 :reject_if => proc { |att| att['name'].blank? },
                                 :allow_destroy => true
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def self.post_feed(user, message)
+    if user.friends
+      user.friends.each do |friend|
+        feed = Feed.new message: message
+        friend.feeds << feed
+        friend.save
+      end
+    end
+  end
 end

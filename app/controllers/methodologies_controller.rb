@@ -35,6 +35,7 @@ class MethodologiesController < ApplicationController
 
     respond_to do |format|
       if @methodology.save
+        User.post_feed(current_user, "#{current_user.full_name} criou uma metodologia - #{@methodology.title}")
         format.html { redirect_to my_profile_path, notice: 'Metodologia criada com sucesso.' }
         format.json { render action: 'show', status: :created, location: @methodology }
       else
@@ -49,6 +50,7 @@ class MethodologiesController < ApplicationController
   def update
     respond_to do |format|
       if @methodology.update(methodology_params)
+        User.post_feed(current_user, "#{current_user.full_name} editou uma metodologia - #{@methodology.title}")
         format.html { redirect_to @methodology, notice: 'Metodologia atualizada com sucesso.' }
         format.json { head :no_content }
       else
