@@ -7,7 +7,7 @@ feature "Methodology", js: true do
     create_methodology
   end
 
-  feature "management" do
+  feature "#management" do
     scenario "user creates new methodology successfully" do
       visit "/methodologies/new"
 
@@ -66,9 +66,9 @@ feature "Methodology", js: true do
     visit "/users/sign_in"
 
     fill_in "Email", with: user.email
-    fill_in "Password", with: '11111111'
+    fill_in "Senha", with: '11111111'
 
-    click_button "Sign in"
+    click_button "Logar"
   end
 
   def create_methodology
