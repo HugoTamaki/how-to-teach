@@ -7,7 +7,7 @@
             </div>
             <div class="col-lg-11">
                 <%= link_to "#{result.title}", methodology_path(result) %> by 
-                <%= link_to "#{result.user.first_name}", profile_path(result.user.id) %> - 
+                <%= link_to "#{result.user.full_name}", profile_path(result.user.id) %> - 
                 <%= rating_for result, "qualidade", star: 5 %>
                 <%= "#{result.content}" %>
             </div>
