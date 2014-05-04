@@ -6,7 +6,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def self.search(search)
-    Methodology.joins(:user).where("users.first_name LIKE :search or users.last_name LIKE :search or methodologies.title LIKE :search", search: "%#{search}%") if search
+    Methodology.joins('left join users as u 
+                          on u.id = methodologies.user_id 
+                       left join rating_caches as r 
+                          on methodologies.id = r.cacheable_id').where('u.first_name LIKE :search 
+                          or u.last_name LIKE :search 
+                          or methodologies.title LIKE :search', search: "%#{search}%").order('r.avg desc') if search
   end
 
   has_attached_file :avatar, styles: { :profile => "100x100>", :search_thumb => "30x30>" }, 
