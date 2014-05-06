@@ -53,7 +53,8 @@ gem 'simple_form'
 gem 'cancan'
 gem 'nested_form'
 gem 'letsrate'
-gem "paperclip", "~> 4.1"
+gem 'paperclip', '~> 4.1'
+gem 'will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

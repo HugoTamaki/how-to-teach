@@ -6,10 +6,6 @@ class MethodologiesController < ApplicationController
   # GET /methodologies
   # GET /methodologies.json
 
-  def index
-    
-  end
-
   # GET /methodologies/1
   # GET /methodologies/1.json
   def show
@@ -84,6 +80,6 @@ class MethodologiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def methodology_params
-      params.require(:methodology).permit(:title, :content, :user_id, videos_attributes: [:id, :methodology_id, :legend, :url, :_destroy])
+      params.require(:methodology).permit(:title, :content, :teaser, :user_id, :image, images_attributes: [:id, :methodology_id, :legend, :image, :_destroy], videos_attributes: [:id, :methodology_id, :legend, :url, :_destroy])
     end
 end

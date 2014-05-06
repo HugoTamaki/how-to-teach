@@ -12,8 +12,23 @@
         <%= @methodology.content %>
     </div>
 
+    <div class="methodology-images">
+        <% if @methodology.images %>
+            <h2>Fotos</h2>
+            <div class="row">
+                <% @methodology.images.each do |image| %>
+                        <div class="col-lg-2">
+                            <a href="<%= image.image.url %>" class="fancybox" title="<%= image.legend %>" rel="group"><%= image_tag image.image(:thumb) %></a>
+                            <p><%= image.legend %></p>
+                        </div>
+                <% end %>
+            </div>
+        <% end %>
+    </div>
+
     <div class="methodology-videos">
         <% if @methodology.videos %>
+            <h2>Videos</h2>
             <% @methodology.videos.each do |video| %>
                 <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
             <% end %>
