@@ -1,15 +1,14 @@
 <% content_for :javascript_includes do %>
-  <%= javascript_include_tag 'lib/jquery.raty.js','lib/letsrate.js'%>
-<% end %> 
-<div class="container">
-  <h1>Meu Perfil</h1>
+  <%= javascript_include_tag 'lib/jquery.raty.js','lib/letsrate.js','endless_scroll.js'%>
+<% end %>
 
+<div class="container">
   <div class="row">
-    <div class="col-lg-5">
+    <div class="col-lg-4">
       <div class="data">
         <h2>Meus dados</h2>
         <%= image_tag @user.avatar(:profile) %>
-        <%= @user.full_name %>
+        <span><%= @user.full_name %></span>
 
         <div class="user-schools">
           <h2>Escolas em que já lecionou</h2>
@@ -17,19 +16,23 @@
             <p><%= school.name %></p>
           <% end %>
         </div>
+        <div class="user-friends">
+          <div class="user-friends-content">
+            <h2>Meus amigos</h2>
+            <%= render partial: 'friends' %>
+          </div>
+        </div>
       </div>
-      <h2>Minhas metodologias</h2>
-      <%= render partial: 'methodologies' %>
-      <%= render partial: 'friends' %>
     </div>
-    <div class="col-lg-3 feeds">
-      <h2>Meus feeds</h2>
-      <% if @user.feeds %>
-        <% @user.feeds.each do |feed| %>
-          <p><%= feed.message %></p>
-          <hr>
-        <% end %>
-      <% end %>
+    <div class="col-lg-4">
+      <h2>Minhas Metodologias</h2>
+      <%= render partial: 'methodologies' %>
+    </div>
+    <div class="col-lg-4 feeds">
+      <h2>Feeds</h2>
+      <div class="feeds-content">
+        <%= render partial: 'feeds' %>
+      </div>
     </div>
   </div>
 </div>

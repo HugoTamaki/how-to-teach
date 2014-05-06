@@ -1,22 +1,30 @@
 <% content_for :javascript_includes do %>
-  <%= javascript_include_tag 'jquery.raty.js','letsrate.js'%>
-<% end %> 
+  <%= javascript_include_tag 'lib/jquery.raty.js','lib/letsrate.js'%>
+<% end %>
 <div class="container">
-    <h1>
-      <%= image_tag @user.avatar(:profile) %>
-      <%= @user.full_name %>
-    </h1>
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="data">
+        <%= image_tag @user.avatar(:profile) %>
+        <span><%= @user.full_name %></span>
 
-    <div class="row">
-        <h2>Minhas metodologias</h2>
-        <div class="col-lg-12">
-            <%= render partial: 'methodologies' %>
-            <%= render partial: 'friends' %>
-            <div class="add-friend">
-              <% unless @user == current_user %>
-                <p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), class: "btn btn-primary", method: :post if current_user.friendships.where(friend_id: @user).blank? %></p>
-              <% end %>
-            </div>
+        <div class="user-schools">
+          <h2>Escolas em que já lecionou</h2>
+          <% @user.schools.each do |school| %>
+            <p><%= school.name %></p>
+          <% end %>
         </div>
+        <div class="user-friends">
+          <div class="friends-content">
+            <h2>Meus amigos</h2>
+            <%= render partial: 'friends' %>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="col-lg-8">
+      <h2>Minhas Metodologias</h2>
+      <%= render partial: 'methodologies' %>
+    </div>
+  </div>
 </div>
