@@ -6,7 +6,7 @@
       <h3><%= link_to "#{methodology.title}", methodology_path(methodology) %></h3>
       <p><%= rating_for methodology, "qualidade", star: 5 %></p>
       <p>
-        <%= methodology.content.html_safe %>
+        <%= methodology.teaser %>
       </p>
       <% if current_user == @user %>
         <p>
