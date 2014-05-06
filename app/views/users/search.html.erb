@@ -1,3 +1,6 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag 'lib/jquery.raty.js','lib/letsrate.js'%>
+<% end %>
 <div class="container">
     <div class="row">
         <% if @search.present? %>
@@ -10,10 +13,12 @@
                 <%= link_to "#{result.user.full_name}", profile_path(result.user.id) %> - 
                 <%= rating_for result, "qualidade", star: 5 %>
                 <%= "#{result.content}" %>
+                <hr/>
             </div>
           <% end %>
         <% else %>
             Nenhum resultado.
         <% end %>
+        <%= will_paginate @search, next_label: 'Próximo', previous_label: 'Anterior' %>
     </div>
 </div>

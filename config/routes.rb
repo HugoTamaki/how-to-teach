@@ -8,6 +8,7 @@ HowToTeach::Application.routes.draw do
   end
 
   resources :methodologies, except: :index do
+    get 'methodologies/paginate_methodologies' => 'methodologies#paginate_methodologies'
     resources :comments
   end
 
@@ -15,6 +16,8 @@ HowToTeach::Application.routes.draw do
   get 'users/my_profile' => 'users#my_profile', as: 'my_profile'
   get 'users/profile/:id' => 'users#profile', as: 'profile'
   get 'users/search' => 'users#search', as: 'search'
+  get 'users/paginate_feeds' => 'users#paginate_feeds'
+  get 'users/paginate_friends' => 'users#paginate_friends'
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
   # The priority is based upon order of creation: first created -> highest priority.
