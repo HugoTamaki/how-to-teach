@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates_attachment :avatar, content_type: {content_type: ["image/jpg", "image/gif", "image/png"]},
                                 size: { :in => 0..200.kilobytes }
 
-  has_many :methodologies
+  has_many :methodologies, dependent: :destroy
   has_many :friendships
   has_many :friends, through: :friendships
   has_many :comments

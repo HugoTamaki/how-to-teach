@@ -19,7 +19,7 @@ $(document).ready(function() {
     $(".fancybox").click(function() {
       $.fancybox({
           'padding'   : 0,
-          'autoScale'   : false,
+          'autoScale'   : true,
           'transitionIn'  : 'none',
           'transitionOut' : 'none',
           'title'     : this.title,
@@ -35,4 +35,13 @@ $(document).ready(function() {
 
       return false;
     });
+
+    // $(".fancybox-image").click(function() {
+    //   $.fancybox({
+    //       'openEffect'  : 'none',
+    //       'closeEffect' : 'none'
+    //   });
+
+    //   return false;
+    // });  
 });

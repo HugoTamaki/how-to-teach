@@ -12,28 +12,80 @@
  *= require_tree .
  */
 
+// .container {
+//     a:hover {
+//         background-color: transparent;
+//         color: black;
+//     }
+// }
+
+.data {
+    span {
+        font-size:20px;
+    }
+}
+
+.feeds-content {
+    overflow: auto;
+    height: 520px;
+}
+
 .friends {
     a {
         font-size: 16px;
     }
 }
 
- .login-box {
- 	margin-top: 15px;
- 	float: right;
+.login-box {
+	margin-top: 15px;
+	float: right;
     .navbar-link:hover {
         background-color: transparent;
     }
-    
- }
+}
 
 .methodology {
-    height: 300px;
+    height: 520px;
     overflow: auto;
+}
+
+.methodology-images {
+    margin: 20px;
+    img {
+        margin: 5px 10px;
+    }
+    a:hover {
+        background-color: transparent;
+        color: black;
+    }
+}
+
+.methodology-videos {
+    margin: 20px;
+    a:hover {
+        background-color: transparent;
+        color: black;
+    }
 }
 
 .search  {
     a {
         font-size: 16px;
     }
+}
+
+.user-friends-content {
+    height: 300px;
+    overflow: auto;
+}
+
+.fancybox {
+    a {
+        background-color: transparent;
+    }
+}
+
+.friends-content {
+    height: 300px;
+    overflow: auto;
 }
