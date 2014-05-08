@@ -35,13 +35,4 @@ $(document).ready(function() {
 
       return false;
     });
-
-    // $(".fancybox-image").click(function() {
-    //   $.fancybox({
-    //       'openEffect'  : 'none',
-    //       'closeEffect' : 'none'
-    //   });
-
-    //   return false;
-    // });  
 });

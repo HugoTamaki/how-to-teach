@@ -69,7 +69,7 @@ class MethodologiesController < ApplicationController
   private
 
     def search_path(search)
-      @search = User.search(search)
+      @search = User.search(search).paginate(page: params[:page], per_page: 10)
       render "users/search"
     end
 
