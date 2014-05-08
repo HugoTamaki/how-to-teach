@@ -8,7 +8,7 @@
         <% end %>
         <%= f.link_to_add "Adicionar imagem", :images %>
     </div>
-    <div class="methodology-video">
+    <div class="methodology-videos">
         <%= f.fields_for :videos do |video_form| %>
             <%= render "video_fields", f: video_form %>
         <% end %>
