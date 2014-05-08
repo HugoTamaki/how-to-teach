@@ -12,6 +12,7 @@ feature "Methodology", js: true do
       visit "/methodologies/new"
 
       fill_in "Titulo", with: "Metodologia"
+      fill_in "Teaser", with: "Teaser"
       fill_in "Conteúdo", with: "Conteudo"
       click_button "GO"
 
@@ -24,6 +25,7 @@ feature "Methodology", js: true do
       visit "/methodologies/new"
 
       fill_in "Titulo", with: "Methodologia"
+      fill_in "Teaser", with: ""
       fill_in "Conteúdo", with: ""
       click_button "GO"
 
@@ -34,6 +36,7 @@ feature "Methodology", js: true do
     scenario "user edit methodology with success" do
       visit "/methodologies/#{Methodology.last.id}/edit"
       fill_in "Titulo", with: "Titulo 2"
+      fill_in "Teaser", with: "Teaser 2"
       fill_in "Conteúdo", with: "Conteudo 2"
       click_button "GO"
 
@@ -44,6 +47,7 @@ feature "Methodology", js: true do
     scenario "user edit methodology with failure" do
       visit "/methodologies/#{Methodology.last.id}/edit"
       fill_in "Titulo", with: ""
+      fill_in "Teaser", with: ""
       fill_in "Conteúdo", with: ""
       click_button "GO"
 
@@ -73,7 +77,7 @@ feature "Methodology", js: true do
 
   def create_methodology
     user = User.first
-    user.methodologies.build(title: "Titulo", content: "Conteudo")
+    user.methodologies.build(title: "Titulo", teaser: "Teaser", content: "Conteudo")
     user.save
   end
 end
