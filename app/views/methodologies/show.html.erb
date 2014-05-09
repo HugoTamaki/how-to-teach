@@ -1,6 +1,6 @@
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag 'lib/jquery.raty.js','lib/letsrate.js'%>
-<% end %> 
+<% end %>
 
 <div class="container">
     <h2><%= @methodology.title %> - <%= "por #{@methodology.user.first_name}" %></h2>
@@ -9,7 +9,7 @@
     <% end %>
     
     <div class="methodology-content">
-        <%= @methodology.content %>
+        <%= @methodology.content.gsub(/\n/, '<br/>').html_safe %>
     </div>
 
     <div class="methodology-images">
@@ -57,7 +57,7 @@
                 <div class="col-lg-11">
                     <p><b><%= comment.user.full_name %></b> - <%= comment.created_at.strftime("%d/%m/%Y - %H:%M") %></p>
                     <div class="comment-content">
-                        <p><%= comment.content %></p>
+                        <p><%= comment.content.gsub(/\n/, '<br/>').html_safe %></p>
                     </div>
                 </div>
             </div>
