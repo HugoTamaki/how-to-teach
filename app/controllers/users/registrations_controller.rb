@@ -29,6 +29,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    if resource.friendships
+      friends = []
+      resource.friendships.each do |friendship|
+        friends << friendship.friend
+      end
+      friends.each do |friend|
+        f = Friendship.where(user_id: friend.id, friend_id: resource.id)
+        f.first.destroy
+      end
+    end
+    resource.destroy
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message :notice, :destroyed if is_flashing_format?
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+  end
+
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u|
