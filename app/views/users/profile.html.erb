@@ -7,7 +7,13 @@
       <div class="data">
         <%= image_tag @user.avatar(:profile) %>
         <span><%= @user.full_name %></span>
-
+        
+        <div class="add-friend">
+            <% unless @user == current_user %>
+              <p><%= link_to "Adicionar amigo", friendships_path(friend_id: @user), class: "btn btn-primary", method: :post if current_user.friendships.where(friend_id: @user).blank? %></p>
+            <% end %>
+            </div>
+        </div>
         <div class="user-schools">
           <h2>Escolas em que já lecionou</h2>
           <% @user.schools.each do |school| %>
@@ -18,7 +24,6 @@
           <div class="friends-content">
             <h2>Meus amigos</h2>
             <%= render partial: 'friends' %>
-          </div>
         </div>
       </div>
     </div>

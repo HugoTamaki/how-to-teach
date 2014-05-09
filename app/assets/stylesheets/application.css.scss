@@ -12,12 +12,14 @@
  *= require_tree .
  */
 
-// .container {
-//     a:hover {
-//         background-color: transparent;
-//         color: black;
-//     }
-// }
+.add-friend {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    width: 360px;
+    height: 55px;
+    overflow: auto;
+}
 
 .data {
     span {
