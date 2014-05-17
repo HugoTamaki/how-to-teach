@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   def my_profile
     search_path params[:search] if params[:search]
     @user = User.find(current_user.id)
-    @feeds = @user.feeds.paginate(page: params[:page], per_page: 10)
-    @friendships = @user.friendships.paginate(page: params[:page], per_page: 10)
+    @feeds = @user.feeds.order(created_at: :desc).paginate(page: params[:page], per_page: 10)
+    @friendships = @user.friendships.order(accepted: :asc).paginate(page: params[:page], per_page: 10)
   end
 
   def profile
