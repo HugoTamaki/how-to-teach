@@ -35,14 +35,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.friendships.each do |friendship|
         friends << friendship.friend
       end
+      friendships = []
       friends.each do |friend|
-        f1 = Friendship.where(user_id: friend.id, friend_id: resource.id).first
-        f2 = Friendship.where(user_id: resource.id, friend_id: friend.id).first
-        f1.destroy
-        f2.destroy
+        friendships << Friendship.where(user_id: friend.id, friend_id: resource.id).first
+        friendships << Friendship.where(user_id: resource.id, friend_id: friend.id).first
       end
+
+      if resource.destroy
+        friendships.each do |f|
+          f.destroy
+        end
+      end
+    else
+      resource.destroy
     end
-    resource.destroy
+    
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message :notice, :destroyed if is_flashing_format?
     yield resource if block_given?
