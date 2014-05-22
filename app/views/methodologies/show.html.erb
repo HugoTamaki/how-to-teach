@@ -3,69 +3,69 @@
 <% end %>
 
 <div class="container">
-    <h2><%= @methodology.title %> - <%= "por #{@methodology.user.first_name}" %></h2>
-    <% if @methodology.user == current_user %>
-        <p><%= link_to "Editar", edit_methodology_path(@methodology), class: "btn btn-primary" %></p>
+  <h2><%= @methodology.title %> - <%= "por #{@methodology.user.first_name}" %></h2>
+  <% if @methodology.user == current_user %>
+    <p><%= link_to "Editar", edit_methodology_path(@methodology), class: "btn btn-primary" %></p>
+  <% end %>
+  
+  <div class="methodology-content">
+      <%= @methodology.content.gsub(/\n/, '<br/>').html_safe %>
+  </div>
+
+  <div class="methodology-images">
+    <% if @methodology.images %>
+      <h2>Fotos</h2>
+      <div class="row">
+        <% @methodology.images.each do |image| %>
+          <div class="col-lg-2">
+            <a href="<%= image.image.url %>" class="fancybox" title="<%= image.legend %>" rel="group"><%= image_tag image.image(:thumb) %></a>
+            <p><%= image.legend %></p>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-    
-    <div class="methodology-content">
-        <%= @methodology.content.gsub(/\n/, '<br/>').html_safe %>
-    </div>
+  </div>
 
-    <div class="methodology-images">
-        <% if @methodology.images %>
-            <h2>Fotos</h2>
-            <div class="row">
-                <% @methodology.images.each do |image| %>
-                        <div class="col-lg-2">
-                            <a href="<%= image.image.url %>" class="fancybox" title="<%= image.legend %>" rel="group"><%= image_tag image.image(:thumb) %></a>
-                            <p><%= image.legend %></p>
-                        </div>
-                <% end %>
-            </div>
-        <% end %>
-    </div>
+  <div class="methodology-videos">
+      <% if @methodology.videos %>
+          <h2>Videos</h2>
+          <% @methodology.videos.each do |video| %>
+              <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
+          <% end %>
+      <% end %>
+  </div>
 
-    <div class="methodology-videos">
-        <% if @methodology.videos %>
-            <h2>Videos</h2>
-            <% @methodology.videos.each do |video| %>
-                <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
-            <% end %>
-        <% end %>
-    </div>
-
-    <div class="methodology-rating">
-        <% if @methodology.qualidade_rates.where(rater_id: current_user.id).present? %>
-            Avaliação da Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
-        <% else %>
-            Avalie esta Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
-        <% end %>
-        Quantos professores avaliaram: <%= @rating.qty if @rating %>
-    </div>
+  <div class="methodology-rating">
+    <% if @methodology.qualidade_rates.where(rater_id: current_user.id).present? %>
+      Avaliação da Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
+    <% else %>
+      Avalie esta Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
+    <% end %>
+    Quantos professores avaliaram: <%= @rating.qty if @rating %>
+  </div>
 </div>
 
 <div class="methodology-comments">
-    <h2>Comentários</h2>
+  <h2>Comentários</h2>
 
-    <div class="comments-list">
-        <% @methodology.comments.each do |comment| %>
-            <div class="row">
-                <div class="col-lg-1">
-                    <%= image_tag comment.user.avatar(:search_thumb) %>
-                </div>
-                <div class="col-lg-11">
-                    <p><b><%= comment.user.full_name %></b> - <%= comment.created_at.strftime("%d/%m/%Y - %H:%M") %></p>
-                    <div class="comment-content">
-                        <p><%= comment.content.gsub(/\n/, '<br/>').html_safe %></p>
-                    </div>
-                </div>
-            </div>
-            <hr>
-        <% end %>
-    </div>
-    <%= simple_form_for([@methodology, @methodology.comments.build]) do |f| %>
-        <%= f.input :content, label: "Novo comentário", input_html: { rows: 10, cols: 70 }%>
-        <%= f.submit "Criar comentário", class: "btn btn-primary" %>
+  <div class="comments-list">
+    <% @methodology.comments.each do |comment| %>
+      <div class="row">
+        <div class="col-lg-1">
+          <%= image_tag comment.user.avatar(:search_thumb) %>
+        </div>
+        <div class="col-lg-11">
+          <p><b><%= comment.user.full_name %></b> - <%= comment.created_at.strftime("%d/%m/%Y - %H:%M") %></p>
+          <div class="comment-content">
+            <p><%= comment.content.gsub(/\n/, '<br/>').html_safe %></p>
+          </div>
+        </div>
+      </div>
+        <hr>
     <% end %>
+  </div>
+  <%= simple_form_for([@methodology, @methodology.comments.build]) do |f| %>
+    <%= f.input :content, label: "Novo comentário", input_html: { rows: 10, cols: 70 }%>
+    <%= f.submit "Criar comentário", class: "btn btn-primary" %>
+  <% end %>
 </div>

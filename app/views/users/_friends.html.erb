@@ -1,8 +1,8 @@
 <% @friendships.each do |friendship| %>
   <p>
     <% if friendship.invited && !friendship.accepted %>
-       <%= friendship.friend.first_name %> adicionou você como amigo, deseja aceitar? - 
-       <%= link_to "Aceitar", friendship_accept_path(friendship, friend_id: friendship.friend.id), class: "btn btn-primary" %>
+      <%= friendship.friend.first_name %> adicionou você como amigo, deseja aceitar? - 
+      <%= link_to "Aceitar", friendship_accept_path(friendship, friend_id: friendship.friend.id), class: "btn btn-primary" %>
     <% elsif friendship.accepted %>
       <%= link_to "#{friendship.friend.first_name}", profile_path(friendship.friend) %> - 
       <%= link_to "Remover amigo", friendship, method: :delete, data: {confirm: "Tem certeza que deseja remover amigo?"} %>
