@@ -36,8 +36,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
         friends << friendship.friend
       end
       friends.each do |friend|
-        f = Friendship.where(user_id: friend.id, friend_id: resource.id)
-        f.first.destroy
+        f1 = Friendship.where(user_id: friend.id, friend_id: resource.id).first
+        f2 = Friendship.where(user_id: resource.id, friend_id: friend.id).first
+        f1.destroy
+        f2.destroy
       end
     end
     resource.destroy
