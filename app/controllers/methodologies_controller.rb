@@ -9,6 +9,8 @@ class MethodologiesController < ApplicationController
   # GET /methodologies/1
   # GET /methodologies/1.json
   def show
+    methodology = Methodology.find(params[:id])
+    @comments = methodology.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
     @rating = RatingCache.where(cacheable_id: params[:id]).first
     search_path params[:search] if params[:search]
   end
@@ -63,6 +65,22 @@ class MethodologiesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to my_profile_path, notice: 'Metodologia apagada com sucesso.' }
       format.json { head :no_content }
+    end
+  end
+
+  def paginate_comments
+    @comments = Methodology.find(params[:id].to_i).comments.paginate(page: params[:page], per_page: 5)
+    binding.pry
+    data = []
+    # @comments.each do |comment|
+    #   hash = {}
+    #   hash[:id] = friendship.id
+    #   hash[:friend_id] = friendship.friend.id
+    #   hash[:name] = friendship.friend.full_name
+    #   data << hash
+    # end
+    respond_to do |format|
+      format.json { render json: data }
     end
   end
 

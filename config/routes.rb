@@ -8,7 +8,7 @@ HowToTeach::Application.routes.draw do
   end
 
   resources :methodologies, except: :index do
-    get 'methodologies/paginate_methodologies' => 'methodologies#paginate_methodologies'
+    get 'paginate_comments', on: :collection
     resources :comments
   end
 

@@ -1,6 +1,7 @@
 $(document).ready(function() {
   var currentFeedsPage = 1;
   var currentFriendsPage = 1;
+  var currentCommentsPage = 1;
    
   $(function($) {
       $('.feeds-content').bind('scroll', function() {
@@ -18,7 +19,26 @@ $(document).ready(function() {
                   }
                   $('.feeds-content').append(html);
                 }
-              })
+              });
+          }
+      });
+
+      $('.comments-list').bind('scroll', function() {
+          if($(this).scrollTop() + $(this).innerHeight() >= this.scrollHeight) {
+              currentCommentsPage++;
+              $.ajax({
+                url: 'paginate_comments?page=' + currentCommentsPage + '&id=' + document.getElementById('methodology_').value,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                  console.log(data);
+                  html = ""
+                  for (i=0;i<data.length;i++) {
+                    html += "<p>"+ data[i]["message"] +"</p><hr>";
+                  }
+                  $('.comments-list').append(html);
+                }
+              });
           }
       });
 
@@ -39,7 +59,7 @@ $(document).ready(function() {
                   }
                   $('.user-friends-content').append(html);
                 }
-              })
+              });
           }
       })
   });

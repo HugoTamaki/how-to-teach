@@ -3,6 +3,7 @@
   <% if @methodology.user == current_user %>
     <p><%= link_to "Editar", edit_methodology_path(@methodology), class: "btn btn-primary" %></p>
   <% end %>
+  <%= hidden_field :methodology, '', value: @methodology.id %>
   
   <div class="methodology-content">
       <%= @methodology.content.gsub(/\n/, '<br/>').html_safe %>
@@ -45,7 +46,7 @@
   <h2>Comentários</h2>
 
   <div class="comments-list">
-    <% @methodology.comments.order(created_at: :desc).each do |comment| %>
+    <% @comments.order(created_at: :desc).each do |comment| %>
       <div class="row">
         <div class="col-lg-1">
           <%= image_tag comment.user.avatar(:search_thumb) %>
