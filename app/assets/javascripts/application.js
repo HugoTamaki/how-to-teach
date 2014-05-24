@@ -14,6 +14,8 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
+//= require lib/jquery.raty
+//= require lib/letsrate
 //= require_tree .
 
 $(document).ready(function() {
