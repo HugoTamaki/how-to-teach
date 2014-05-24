@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @comment = @methodology.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      User.post_feed(current_user, "#{current_user.full_name} postou um comentário na metodologia #{@methology.title}")
+      User.post_feed(current_user, "#{current_user.full_name} postou um comentário na metodologia #{@methodology.title}")
       redirect_to methodology_path(@methodology), notice: "Comentário adicionado com sucesso."
     else
       redirect_to methodology_path(@methodology), alert: "Comentário não foi adicionado com sucesso."
