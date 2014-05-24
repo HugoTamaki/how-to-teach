@@ -1,7 +1,3 @@
-<% content_for :javascript_includes do %>
-  <%= javascript_include_tag 'lib/jquery.raty.js','lib/letsrate.js'%>
-<% end %>
-
 <div class="container">
   <h2><%= @methodology.title %> - <%= "por #{@methodology.user.first_name}" %></h2>
   <% if @methodology.user == current_user %>
@@ -49,7 +45,7 @@
   <h2>Comentários</h2>
 
   <div class="comments-list">
-    <% @methodology.comments.each do |comment| %>
+    <% @methodology.comments.order(created_at: :desc).each do |comment| %>
       <div class="row">
         <div class="col-lg-1">
           <%= image_tag comment.user.avatar(:search_thumb) %>
