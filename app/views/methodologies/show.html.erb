@@ -45,7 +45,8 @@
 <div class="methodology-comments">
   <h2>Comentários</h2>
 
-  <div class="comments-list">
+  <% if @comments.present? %>
+    <div class="comments-list">
     <% @comments.order(created_at: :desc).each do |comment| %>
       <div class="row">
         <div class="col-lg-1">
@@ -61,6 +62,8 @@
         <hr>
     <% end %>
   </div>
+  <% end %>
+
   <%= simple_form_for([@methodology, @methodology.comments.build]) do |f| %>
     <%= f.input :content, label: "Novo comentário", input_html: { rows: 10, cols: 70 }%>
     <%= f.submit "Criar comentário", class: "btn btn-primary" %>

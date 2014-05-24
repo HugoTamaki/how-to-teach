@@ -9,7 +9,7 @@
           <%= link_to "#{result.title}", methodology_path(result) %> by 
           <%= link_to "#{result.user.full_name}", profile_path(result.user.id) %> - 
           <%= rating_for result, "qualidade", star: 5 %>
-          <%= "#{result.content}" %>
+          <%= "#{result.teaser}" %>
           <hr/>
         </div>
       <% end %>

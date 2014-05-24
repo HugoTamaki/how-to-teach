@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506222029) do
+ActiveRecord::Schema.define(version: 20140524122022) do
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -21,12 +21,17 @@ ActiveRecord::Schema.define(version: 20140506222029) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["methodology_id"], name: "index_comments_on_methodology_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
   create_table "feeds", force: true do |t|
     t.integer  "user_id"
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "feeds", ["user_id"], name: "index_feeds_on_user_id", using: :btree
 
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
@@ -36,6 +41,9 @@ ActiveRecord::Schema.define(version: 20140506222029) do
     t.boolean  "accepted"
     t.boolean  "invited"
   end
+
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
   create_table "images", force: true do |t|
     t.integer  "methodology_id"
@@ -48,6 +56,8 @@ ActiveRecord::Schema.define(version: 20140506222029) do
     t.string   "legend"
   end
 
+  add_index "images", ["methodology_id"], name: "index_images_on_methodology_id", using: :btree
+
   create_table "methodologies", force: true do |t|
     t.string   "title"
     t.text     "content"
@@ -56,6 +66,8 @@ ActiveRecord::Schema.define(version: 20140506222029) do
     t.datetime "updated_at"
     t.text     "teaser"
   end
+
+  add_index "methodologies", ["user_id"], name: "index_methodologies_on_user_id", using: :btree
 
   create_table "rates", force: true do |t|
     t.integer  "rater_id"
@@ -89,6 +101,8 @@ ActiveRecord::Schema.define(version: 20140506222029) do
     t.datetime "updated_at"
   end
 
+  add_index "schools", ["user_id"], name: "index_schools_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -120,5 +134,7 @@ ActiveRecord::Schema.define(version: 20140506222029) do
     t.datetime "updated_at"
     t.string   "legend"
   end
+
+  add_index "videos", ["methodology_id"], name: "index_videos_on_methodology_id", using: :btree
 
 end
