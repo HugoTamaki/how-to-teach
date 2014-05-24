@@ -69,16 +69,16 @@ class MethodologiesController < ApplicationController
   end
 
   def paginate_comments
-    @comments = Methodology.find(params[:id].to_i).comments.paginate(page: params[:page], per_page: 5)
-    binding.pry
+    @comments = Methodology.find(params[:id]).comments.paginate(page: params[:page], per_page: 5)
     data = []
-    # @comments.each do |comment|
-    #   hash = {}
-    #   hash[:id] = friendship.id
-    #   hash[:friend_id] = friendship.friend.id
-    #   hash[:name] = friendship.friend.full_name
-    #   data << hash
-    # end
+    @comments.each do |comment|
+      hash = {}
+      hash[:image_path] = view_context.image_tag comment.user.avatar(:search_thumb)
+      hash[:user_name] = comment.user.full_name
+      hash[:time] = comment.created_at.strftime("%d/%m/%Y - %H:%M")
+      hash[:content] = comment.content.gsub(/\n/, '<br/>').html_safe
+      data << hash
+    end
     respond_to do |format|
       format.json { render json: data }
     end
