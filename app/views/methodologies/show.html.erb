@@ -24,12 +24,12 @@
   </div>
 
   <div class="methodology-videos">
-      <% if @methodology.videos %>
-          <h2>Videos</h2>
-          <% @methodology.videos.each do |video| %>
-              <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
-          <% end %>
+    <% if @methodology.videos %>
+      <h2>Videos</h2>
+      <% @methodology.videos.each do |video| %>
+        <p><b><%= link_to video.legend, video.url, class: "fancybox" %></b></p>
       <% end %>
+    <% end %>
   </div>
 
   <div class="methodology-rating">
