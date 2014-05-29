@@ -44,6 +44,8 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include Devise::TestHelpers, :type => :controller
+  config.include Warden::Test::Helpers
+  Warden.test_mode!
 
   config.use_transactional_fixtures = false
   config.before(:each) do
