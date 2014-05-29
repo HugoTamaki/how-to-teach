@@ -1,10 +1,12 @@
 #encoding: UTF-8
 require 'spec_helper'
 
-feature "Methodology", js: true do
+feature "Methodology" do
+  let(:user) { FactoryGirl.create :user }
+
   before :each do
-    login
-    create_methodology
+    login_as user
+    user.methodologies.create(title: "Titulo", teaser: "Resumo", content: "Conteúdo")
   end
 
   feature "#management" do
@@ -55,7 +57,7 @@ feature "Methodology", js: true do
       current_path.should == "/methodologies/#{Methodology.last.id}"
     end
 
-    scenario "user delete methodology" do
+    scenario "user delete methodology", js: true do
       visit "/users/my_profile"
       click_link "Remover"
       page.driver.browser.switch_to.alert.accept
@@ -65,19 +67,19 @@ feature "Methodology", js: true do
     end
   end
 
-  def login
-    user = FactoryGirl.create(:user)
-    visit "/users/sign_in"
+  # def login
+  #   user = FactoryGirl.create(:user)
+  #   visit "/users/sign_in"
 
-    fill_in "Email", with: user.email
-    fill_in "Senha", with: '11111111'
+  #   fill_in "Email", with: user.email
+  #   fill_in "Senha", with: '11111111'
 
-    click_button "Logar"
-  end
+  #   click_button "Logar"
+  # end
 
-  def create_methodology
-    user = User.first
-    user.methodologies.build(title: "Titulo", teaser: "Teaser", content: "Conteudo")
-    user.save
-  end
+  # def create_methodology
+  #   user = User.first
+  #   user.methodologies.build(title: "Titulo", teaser: "Teaser", content: "Conteudo")
+  #   user.save
+  # end
 end
