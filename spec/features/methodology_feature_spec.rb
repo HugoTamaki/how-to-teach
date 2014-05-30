@@ -4,12 +4,12 @@ require 'spec_helper'
 feature "Methodology" do
   let(:user) { FactoryGirl.create :user }
 
-  before :each do
-    login_as user
-    user.methodologies.create(title: "Titulo", teaser: "Resumo", content: "Conteúdo")
-  end
+  feature "#create methodology" do
 
-  feature "#management" do
+    before(:each) do
+      login_as user
+    end
+
     scenario "user creates new methodology successfully" do
       visit "/methodologies/new"
 
@@ -34,6 +34,14 @@ feature "Methodology" do
       expect(page).to have_text("não pode ficar em branco")
       current_path.should == "/methodologies"
     end
+  end
+
+  feature "#edit methodology" do
+
+    before(:each) do
+      login_as user
+      user.methodologies.create(title: "Titulo", teaser: "Resumo", content: "Conteúdo")
+    end
 
     scenario "user edit methodology with success" do
       visit "/methodologies/#{Methodology.last.id}/edit"
@@ -56,6 +64,14 @@ feature "Methodology" do
       expect(page).to have_text("não pode ficar em branco")
       current_path.should == "/methodologies/#{Methodology.last.id}"
     end
+  end
+
+  feature "#delete methodology" do
+
+    before(:each) do
+      login_as user
+      user.methodologies.create(title: "Titulo", teaser: "Resumo", content: "Conteúdo")
+    end
 
     scenario "user delete methodology", js: true do
       visit "/users/my_profile"
@@ -66,20 +82,4 @@ feature "Methodology" do
       current_path.should == "/users/my_profile"
     end
   end
-
-  # def login
-  #   user = FactoryGirl.create(:user)
-  #   visit "/users/sign_in"
-
-  #   fill_in "Email", with: user.email
-  #   fill_in "Senha", with: '11111111'
-
-  #   click_button "Logar"
-  # end
-
-  # def create_methodology
-  #   user = User.first
-  #   user.methodologies.build(title: "Titulo", teaser: "Teaser", content: "Conteudo")
-  #   user.save
-  # end
 end
