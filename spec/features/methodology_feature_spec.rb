@@ -18,8 +18,8 @@ feature "Methodology" do
       fill_in "Conteúdo", with: "Conteudo"
       click_button "GO"
 
-      expect(page).to have_text("Metodologia criada com sucesso.")
-      expect(page).to have_text("Metodologia")
+      page.should have_text("Metodologia criada com sucesso.")
+      page.should have_text("Metodologia")
       current_path.should == "/users/my_profile"
     end
 
@@ -31,7 +31,7 @@ feature "Methodology" do
       fill_in "Conteúdo", with: ""
       click_button "GO"
 
-      expect(page).to have_text("não pode ficar em branco")
+      page.should have_text("não pode ficar em branco")
       current_path.should == "/methodologies"
     end
   end
@@ -50,7 +50,7 @@ feature "Methodology" do
       fill_in "Conteúdo", with: "Conteudo 2"
       click_button "GO"
 
-      expect(page).to have_text("Titulo 2")
+      page.should have_text("Titulo 2")
       current_path.should == "/methodologies/#{Methodology.last.id}"
     end
 
@@ -61,7 +61,7 @@ feature "Methodology" do
       fill_in "Conteúdo", with: ""
       click_button "GO"
 
-      expect(page).to have_text("não pode ficar em branco")
+      page.should have_text("não pode ficar em branco")
       current_path.should == "/methodologies/#{Methodology.last.id}"
     end
   end
@@ -78,8 +78,43 @@ feature "Methodology" do
       click_link "Remover"
       page.driver.browser.switch_to.alert.accept
 
-      expect(page).to have_text("Metodologia apagada com sucesso.")
+      page.should have_text("Metodologia apagada com sucesso.")
       current_path.should == "/users/my_profile"
+    end
+  end
+
+  feature "#comment methodology" do
+    
+    before(:each) do
+      login_as user
+      user.methodologies.create(title: "Titulo", teaser: "Resumo", content: "Conteudo")
+    end
+
+    scenario "user comments methodology" do
+      visit "/methodologies/#{Methodology.last.id}"
+
+      fill_in "Novo comentário", with: "Essa metodologia é muito boa"
+      click_button "Criar comentário"
+
+      page.should have_text "Essa metodologia é muito boa"
+      current_path.should == "/methodologies/#{Methodology.last.id}"
+    end
+  end
+
+  feature "#rate methodology", js: true do
+    
+    before(:each) do
+      login_as user
+      user.methodologies.create(title: "Titulo", teaser: "Resumo", content: "Conteudo")
+    end
+
+    scenario "user rates methodology" do
+      visit "/methodologies/#{Methodology.last.id}"
+
+      find("img[alt='5']").click
+      last_methodology = Methodology.last
+      methodology_last_rate = last_methodology.qualidade_rates.last
+      methodology_last_rate.stars.should be_equal(5.0)
     end
   end
 end
