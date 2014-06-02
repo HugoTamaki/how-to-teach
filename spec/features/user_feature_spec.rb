@@ -1,4 +1,3 @@
-#encoding: UTF-8
 require 'spec_helper'
 
 feature "User" do
@@ -110,5 +109,62 @@ feature "User" do
       page.driver.browser.switch_to.alert.accept
       current_path.should == "/"
     end
+  end
+
+  feature "#search" do
+    let(:user_B) { FactoryGirl.create(:user, first_name: "Jose", last_name: "Pereira", email: "pereira@exemplo.com", password: "11111111", password_confirmation: "11111111") }
+
+    before(:each) do
+      login_as user
+      user_B.methodologies.create(title: "Aprenda Ruby", teaser: "resumo", content: "Conteúdo")
+    end
+
+    scenario "user search for methodology", js: true do
+      visit "/users/my_profile"
+      fill_in 'search', with: "Ruby"
+      click_button "Search"
+
+      page.should have_text "Aprenda Ruby"
+      page.should have_text "Jose Pereira"
+      current_path.should == "/users/my_profile"
+    end
+
+    scenario "user search for user", js: true do
+      visit "/users/my_profile"
+      fill_in 'search', with: "Jose"
+      click_button "Search"
+
+      page.should have_text "Aprenda Ruby"
+      page.should have_text "Jose Pereira"
+      current_path.should == "/users/my_profile"
+    end
+  end
+
+  feature "#add friend" do
+    let(:user_B) { FactoryGirl.create(:user, first_name: "Jose", last_name: "Pereira", email: "pereira@exemplo.com", password: "11111111", password_confirmation: "11111111") }
+
+    before(:each) do
+      login_as user
+    end
+
+    scenario "user adds a friend" do
+      visit "/users/profile/#{user_B.id}"
+      click_link "Adicionar amigo"
+
+      page.should have_text "Convite enviado para o professor."
+      click_link "Sair"
+
+      visit "/users/sign_in"
+      fill_in "Email", with: "pereira@exemplo.com"
+      fill_in "Senha", with: "11111111"
+      click_button "Logar"
+
+      page.should have_text "Hugo adicionou você como amigo, deseja aceitar?"
+      click_link "Aceitar"
+      page.should have_text "Amigo aceito com sucesso."
+      user_B.friendships.last.friend.full_name.should == "Hugo Tamaki"
+      user.friendships.last.friend.full_name.should == "Jose Pereira"
+    end
+
   end
 end
