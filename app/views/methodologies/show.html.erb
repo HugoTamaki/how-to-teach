@@ -38,7 +38,7 @@
     <% else %>
       Avalie esta Metodologia: <%= rating_for @methodology, "qualidade", star: 5 %>
     <% end %>
-    Quantos professores avaliaram: <%= @rating.qty if @rating %>
+    Quantos professores avaliaram: <%= @methodology.qualidade_average.qty if @methodology.qualidade_average.present? %>
   </div>
 </div>
 

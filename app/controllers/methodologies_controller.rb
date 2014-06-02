@@ -11,7 +11,6 @@ class MethodologiesController < ApplicationController
   def show
     methodology = Methodology.find(params[:id])
     @comments = methodology.comments.order(created_at: :desc).paginate(page: params[:page], per_page: 5)
-    @rating = RatingCache.where(cacheable_id: params[:id]).first
     search_path params[:search] if params[:search]
   end
 
