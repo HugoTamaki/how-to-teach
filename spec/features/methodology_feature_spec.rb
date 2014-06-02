@@ -1,4 +1,3 @@
-#encoding: UTF-8
 require 'spec_helper'
 
 feature "Methodology" do
@@ -112,9 +111,10 @@ feature "Methodology" do
       visit "/methodologies/#{Methodology.last.id}"
 
       find("img[alt='5']").click
+      sleep 0.2
       last_methodology = Methodology.last
-      methodology_last_rate = last_methodology.qualidade_rates.last
-      methodology_last_rate.stars.should be_equal(5.0)
+      last_methodology.qualidade_average.qty.should be_equal(1)
+      last_methodology.qualidade_average.avg.should be_equal(5.0)
     end
   end
 end
