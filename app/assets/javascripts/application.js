@@ -38,4 +38,13 @@ $(document).ready(function() {
 
       return false;
     });
+
+    $(".nav").children("li").hover(
+      function(){
+        $(this).addClass("active");
+      },
+      function(){
+        $(this).removeClass("active");
+      }
+    );
 });
